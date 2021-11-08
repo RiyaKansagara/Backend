@@ -42,12 +42,17 @@
 include 'con.php';
 session_start();
 
-
-$email=$_SESSION['email'];
+if($_SESSION['email']==''){
+    header('Location:login.php');
+}else{
+    $email=$_SESSION['email'];
 $query1=mysqli_query($con,"Select name from Student where email='$email'") or die("error in query");
 
 $row1=mysqli_fetch_array($query1);
     echo "<center>Hello ".$row1['name']."</center>";
+
+}
+
 
 
 echo "<center><table class='table-primary' border='2'>
@@ -76,4 +81,5 @@ while($row=mysqli_fetch_array($query))
     echo "</tr>";
 }
 echo "</table></center>";
+
 ?>

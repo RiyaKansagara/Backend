@@ -27,9 +27,15 @@
                 <input type="email" class="input-value" name="email" id="" placeholder="Enter your Email">
                 </td>
             </tr>
+           
             <tr>
                 <td>
                 <input type="password" class="input-value" name="password" id="" placeholder="Enter your Password">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <input type="password" class="input-value" name="c_password" id="" placeholder="Confirm your Password">
                 </td>
             </tr>
             <tr>
@@ -46,14 +52,15 @@
         </table>
     </form>
     </center>
-</body>
+    </body>
 </html>
 
 <?php
 include 'con.php';
-
-
-if(isset($_POST['signup'])){
+if($_POST['password']==$_POST['c_password'])
+{
+if(isset($_POST['signup']))
+{
 
     $name=$_POST['name'];
     $email=$_POST['email'];
@@ -69,8 +76,12 @@ if(isset($_POST['signup'])){
     else
     {
         echo "failed";
-    }
+   }
 }
-
-
+}
+else
+{
+    echo '<script>alert("Password not matched")</script>';
+}
 ?>
+
