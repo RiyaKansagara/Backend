@@ -10,7 +10,7 @@
 </head>
 <body>
     <center>
-    <form action="signup.php" method="post">
+    <form action="csignup.php" method="post">
         <table>
             <tr style="background-color: rgb(224, 111, 36);">
                 <td style="padding-bottom: 20px;">
@@ -42,7 +42,7 @@
             <tr>
                 <td style="padding-bottom: 20px;">
                 <input type="submit" class="btn" name="signup" value="SIGN UP">
-                <a href="login.php" class="btn" style="background-color:  rgb(224, 111, 36);border-radius: 10px;">LOGIN</a>    
+                <a href="clogin1.php" class="btn" style="background-color:  rgb(224, 111, 36);border-radius: 10px;">LOGIN</a>    
             </td>
             </tr>
         </table>
@@ -62,11 +62,11 @@ if(isset($_POST['signup']))
     $email=$_POST['email'];
     $password=$_POST['password'];
 
-    $query="insert into Customer(name,password,email) values('$name','$password','$email')" or die("error in query");
+    $query="insert into Customer(Name,password,email) values('$name','$password','$email')" or die("error in query");
     
     if(mysqli_query($con,$query))
     {
-        header('Location:customer.php');
+        header('Location:clogin1.php');
     }
     else
     {

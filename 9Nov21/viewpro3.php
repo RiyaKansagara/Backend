@@ -81,7 +81,7 @@ while($row=mysqli_fetch_array($query))
     echo "<td>".$row['price']."</td>";
     echo "<td>".$row['category']."</td>";
     echo "<td>".$row['description']."</td>";
-    echo "<td><img src=".$row['image']." height='200px' width='200px'></td>";
+    echo "<td><img src=".$row['image']." height='50px' width='50px'></td>";
    
 
     echo "<td><a href='update3.php?id=$id'>EDIT</a></td>";

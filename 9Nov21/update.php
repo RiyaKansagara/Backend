@@ -100,14 +100,15 @@ if(isset($_POST['update'])){
     $name=$_POST['name'];
     $price=$_POST['price'];
     $description=$_POST['description'];
-    $filepath = "assets/img/products/" . $_FILES["file"]["name"];
     $selected=$_POST['category'];
     $is_active=$_POST['is_active'];
 
+    if($_FILES["file"]["size"]==0){
+        $filepath=$image;
+    }else{
+        $filepath = "assets/img/products/" . $_FILES["file"]["name"];
 
-
-    include 'con.php';
-    move_uploaded_file($_FILES["file"]["tmp_name"], $filepath);
+    }
 
 
     $sql="update Product set pname='$name', price='$price', description='$description', image='$filepath', category='$selected', is_active='$is_active' where id=$id" or die("Error in Query");
@@ -117,6 +118,7 @@ if(isset($_POST['update'])){
 
         if($query)
         {
+            move_uploaded_file($_FILES["file"]["tmp_name"], $filepath);
             header('Location:view.php');
         }
         else

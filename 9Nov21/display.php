@@ -85,7 +85,7 @@
                                 <li><a href="contact.html">Contact</a></li>
                                 <li><a href="shop.html">Shop</a>
                                     <ul class="sub-menu">
-                                        <li><a href="shop.html">Shop</a></li>
+                                        <li><a href="shop.php">Shop</a></li>
                                         <li><a href="checkout.html">Check Out</a></li>
                                         <li><a href="single-product.html">Single Product</a></li>
                                         <li><a href="cart.html">Cart</a></li>
@@ -99,7 +99,7 @@
                                 </li>
                             </ul>
                         </nav>
-                        <a class="mobile-show search-bar-icon" href="search.php"><i class="fas fa-search"></i></a>
+                        <a class="mobile-show search-bar-icon" href="search.php?query=<?php echo htmlentities($row['pname']); ?>"><i class="fas fa-search"></i></a>
                         <div class="mobile-menu"></div>
                         <!-- menu end -->
                     </div>
@@ -118,8 +118,11 @@
                     <div class="search-bar">
                         <div class="search-bar-tablecell">
                             <h3>Search For:</h3>
-                            <input type="text" placeholder="Keywords">
-                            <button type="submit">Search <i class="fas fa-search"></i></button>
+                            <form action="search.php" method="get">
+                            <input type="text" placeholder="Keywords" name="search">
+                            <a href="search.php"><button type="submit" name="submit">Search <i class="fas fa-search"></i></button></a>
+                            </form>
+                           
                         </div>
                     </div>
                 </div>
@@ -138,7 +141,7 @@
                             <p class="subtitle">Fresh & Organic</p>
                             <h1>Delicious Seasonal Fruits</h1>
                             <div class="hero-btns">
-                                <a href="shop.html" class="boxed-btn">Fruit Collection</a>
+                                <a href="shop.php" class="boxed-btn">Fruit Collection</a>
                                 <a href="contact.html" class="bordered-btn">Contact Us</a>
                             </div>
                         </div>
@@ -206,17 +209,28 @@
             </div>
 
             <div class="row">
+                <?php
+                include "con.php";
+                $query=mysqli_query($con,"select * from Product where is_active=1 ");
+                while($row=mysqli_fetch_array($query))
+                {?>
+
                 <div class="col-lg-4 col-md-6 text-center">
                     <div class="single-product-item">
                         <div class="product-image">
-                            <a href="single-product.html"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
+                            <a href="single-product.php?pid=<?php echo htmlentities($row['id']); ?>"><img src=<?php echo htmlentities($row['image']); ?> alt="" height="200px" width="200px"></a>
                         </div>
-                        <h3>Strawberry</h3>
-                        <p class="product-price"><span>Per Kg</span> 85$ </p>
-                        <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <h3><?php echo htmlentities($row['pname']); ?></h3>
+                        <p class="product-price"><span>Per Kg</span>$<?php echo htmlentities($row['price']); ?></p>
+                        <a href="cart.php?pid=<?php echo htmlentities($row['id']); ?>" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 text-center">
+
+                <?php
+                }
+                ?>
+                
+                <!-- <div class="col-lg-4 col-md-6 text-center">
                     <div class="single-product-item">
                         <div class="product-image">
                             <a href="single-product.html"><img src="assets/img/products/product-img-2.jpg" alt=""></a>
@@ -239,7 +253,7 @@
             </div>
         </div>
     </div>
-    <!-- end product section -->
+    end product section -->
 
     <!-- cart banner section -->
     <section class="cart-banner pt-100 pb-100">
@@ -365,6 +379,7 @@
     </div>
     <!-- end advertisement section -->
 
+
     <!-- shop banner -->
     <section class="shop-banner">
         <div class="container">
@@ -372,7 +387,6 @@
             <div class="sale-percent"><span>Sale! <br> Upto</span>50% <span>off</span></div>
             <a href="shop.html" class="cart-btn btn-lg">Shop Now</a>
         </div>
-
     </section>
     <!-- end shop banner -->
 
